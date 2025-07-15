@@ -1,0 +1,22 @@
+{
+  "name": "translate",
+  "version": "0.1.0",
+  "description": "Adds a small button next to each message to translate that message with LibreTranslate.",
+  "keywords": [],
+  "license": "LGPL-3.0-or-later",
+  "author": {
+    "name": "Sirius",
+    "email": "sirius@siri.ws",
+    "url": "https://siri.ws"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabriccore/translate-js"
+  },
+  "dependencies": {
+    "rinode": "0.1.0",
+    "text": "0.1.0",
+    "fabric-api-events": "0.1.0",
+    "listener": "0.1.0"
+  }
+}
