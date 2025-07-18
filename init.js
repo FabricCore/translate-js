@@ -28,6 +28,8 @@ function getOptions() {
     return got;
 }
 
+getOptions();
+
 addEventListener("clientModifyReceiveGameMessageEvent", (text) => {
     let content = text.getString().replaceAll(/§./g, "");
     if (content.trim().length == 0) return;
