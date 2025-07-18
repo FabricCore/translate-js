@@ -1,6 +1,32 @@
 let { StringArgumentType } = com.mojang.brigadier.arguments;
 let { createText } = require("text");
 let command = require("command");
+let config = require("config");
+
+function getOptions() {
+    let got = config.load("translate");
+    let changed = false;
+
+    if (got == undefined) {
+        changed = true;
+        got = {};
+    }
+    if (got.instance == undefined) {
+        changed = true;
+        got.instance = "translate.siri.ws";
+    }
+    if (got.source == undefined) {
+        changed = true;
+        got.source = "auto";
+    }
+    if (got.target == undefined) {
+        changed = true;
+        got.target = "en";
+    }
+
+    if (changed) config.save("translate", got);
+    return got;
+}
 
 addEventListener("clientModifyReceiveGameMessageEvent", (text) => {
     let content = text.getString().replaceAll(/§./g, "");
@@ -25,15 +51,16 @@ addEventListener("clientModifyReceiveGameMessageEvent", (text) => {
 
 function autoTranslate(ctx) {
     let content = StringArgumentType.getString(ctx, "content");
+    let options = getOptions();
     console.print("\u00A78Translating...");
-    fetch("https://translate.siri.ws/translate", {
+    fetch(`https://${options.instance}/translate`, {
         method: "POST",
         body: JSON.stringify({
             q: content,
-            source: "auto",
-            target: "en",
+            source: options.source,
+            target: options.target,
             format: "text",
-            alternatives: 3,
+            alternatives: 1,
             api_key: "",
         }),
         headers: { "Content-Type": "application/json" },

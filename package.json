@@ -17,6 +17,7 @@
     "rinode": "0.1.0",
     "text": "0.1.0",
     "fabric-api-events": "0.1.0",
-    "listener": "0.1.0"
+    "listener": "0.1.0",
+    "config": "0.1.0"
   }
 }
